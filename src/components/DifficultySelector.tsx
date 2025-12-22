@@ -24,15 +24,14 @@ export default function DifficultySelector({
       onValueChange={(v) => onChange(v as Difficulty)}
       disabled={disabled}
     >
-      <SelectTrigger className="w-36">
+      <SelectTrigger className="w-40 bg-card/80 backdrop-blur-sm border-border/50">
         <SelectValue />
       </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="easy">Easy (6)</SelectItem>
-        <SelectItem value="medium">Medium (12)</SelectItem>
-        <SelectItem value="hard">Hard (18)</SelectItem>
+      <SelectContent className="bg-card border-border/50">
+        <SelectItem value="easy">Easy (6 cards)</SelectItem>
+        <SelectItem value="medium">Medium (12 cards)</SelectItem>
+        <SelectItem value="hard">Hard (18 cards)</SelectItem>
       </SelectContent>
     </Select>
   )
 }
-

@@ -6,6 +6,7 @@ import Scoreboard from './Scoreboard'
 import DifficultySelector from './DifficultySelector'
 import CardGrid from './CardGrid'
 import GameOverDialog from './GameOverDialog'
+import LoadingSpinner from './LoadingSpinner'
 
 const POKEMON_API_BASE = 'https://pokeapi.co/api/v2/pokemon'
 const POKEMON_ID_RANGE = { min: 1, max: 1010 }
@@ -87,8 +88,8 @@ export default function Game() {
   }
 
   return (
-    <div className="flex flex-col items-center gap-6 p-4">
-      <div className="flex items-center gap-6">
+    <div className="flex flex-col items-center gap-6 px-4">
+      <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
         <Scoreboard score={score} bestScore={bestScore} />
         <DifficultySelector
           value={difficulty}
@@ -97,9 +98,7 @@ export default function Game() {
         />
       </div>
 
-      {status === 'loading' && (
-        <div className="text-xl animate-pulse">Loading Pokémon...</div>
-      )}
+      {status === 'loading' && <LoadingSpinner />}
 
       {status !== 'loading' && (
         <CardGrid

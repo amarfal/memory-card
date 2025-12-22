@@ -7,16 +7,16 @@ function App() {
       className="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
-      <div className="min-h-screen bg-black/60 backdrop-blur-xs">
-        <header className="text-center py-6">
-          <h1 className="text-4xl font-bold text-primary drop-shadow-lg">
+      <div className="min-h-screen bg-gradient-to-b from-black/70 via-black/50 to-black/70 backdrop-blur-xs">
+        <header className="text-center py-8">
+          <h1 className="font-pokemon text-5xl md:text-7xl text-primary drop-shadow-lg">
             Pokémon Memory Game
           </h1>
-          <p className="text-muted-foreground mt-2">
-            Click each card only once!
+          <p className="text-muted-foreground mt-3 text-lg">
+            Click each card only once — don't repeat!
           </p>
         </header>
-        <main>
+        <main className="pb-8">
           <Game />
         </main>
       </div>

@@ -27,27 +27,39 @@ export default function GameOverDialog({
 
   return (
     <Dialog open={isOpen}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md bg-gradient-to-br from-card to-background border-2 border-primary/30">
         <DialogHeader>
-          <DialogTitle className="text-2xl text-center">
-            {isWin ? '🎉 You Won!' : '😢 Game Over'}
+          <DialogTitle className="font-pokemon text-5xl text-center">
+            {isWin ? (
+              <span className="text-primary">You Won!</span>
+            ) : (
+              <span className="text-accent">Game Over</span>
+            )}
           </DialogTitle>
-          <DialogDescription className="text-center text-lg">
+          <DialogDescription className="text-center text-base pt-2">
             {isWin
-              ? 'Congratulations! You remembered all the Pokémon!'
-              : 'You clicked the same card twice!'}
+              ? 'Amazing! You remembered all the Pokémon!'
+              : 'Oops! You clicked the same card twice!'}
           </DialogDescription>
         </DialogHeader>
-        <div className="text-center py-4">
-          <p className="text-xl">
-            Score: <span className="font-bold text-primary">{score}</span>
-          </p>
-          <p className="text-muted-foreground">
-            Best: <span className="font-bold">{bestScore}</span>
-          </p>
+        <div className="text-center py-6">
+          <div className="flex justify-center gap-8">
+            <div>
+              <span className="text-muted-foreground text-sm">Final Score</span>
+              <p className="font-pokemon text-5xl text-primary">{score}</p>
+            </div>
+            <div>
+              <span className="text-muted-foreground text-sm">Best Score</span>
+              <p className="font-pokemon text-5xl text-secondary">{bestScore}</p>
+            </div>
+          </div>
         </div>
         <DialogFooter className="sm:justify-center">
-          <Button onClick={onRestart} size="lg">
+          <Button
+            onClick={onRestart}
+            size="lg"
+            className="font-semibold text-lg px-8"
+          >
             Play Again
           </Button>
         </DialogFooter>
@@ -55,4 +67,3 @@ export default function GameOverDialog({
     </Dialog>
   )
 }
-
