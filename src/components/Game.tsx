@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Pokemon, Difficulty, GameStatus, DIFFICULTY_CARDS } from '@/types/pokemon'
 import { shuffleArray, generateRandomIds } from '@/lib/utils'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
 import Scoreboard from './Scoreboard'
 import DifficultySelector from './DifficultySelector'
 import CardGrid from './CardGrid'
@@ -28,10 +29,7 @@ export default function Game() {
   const [pokemon, setPokemon] = useState<Pokemon[]>([])
   const [clickedIds, setClickedIds] = useState<Set<number>>(new Set())
   const [score, setScore] = useState(0)
-  const [bestScore, setBestScore] = useState(() => {
-    const stored = localStorage.getItem('bestScore')
-    return stored ? parseInt(stored, 10) : 0
-  })
+  const [bestScore, setBestScore] = useLocalStorage('bestScore', 0)
   const [difficulty, setDifficulty] = useState<Difficulty>('medium')
   const [status, setStatus] = useState<GameStatus>('loading')
 
@@ -54,11 +52,6 @@ export default function Game() {
     loadPokemon()
     return () => { ignore = true }
   }, [difficulty])
-
-  // Persist best score
-  useEffect(() => {
-    localStorage.setItem('bestScore', bestScore.toString())
-  }, [bestScore])
 
   function handleCardClick(id: number) {
     if (status !== 'playing') return
