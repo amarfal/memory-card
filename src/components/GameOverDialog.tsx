@@ -27,30 +27,26 @@ export default function GameOverDialog({
 
   return (
     <Dialog open={isOpen}>
-      <DialogContent className="sm:max-w-md bg-gradient-to-br from-card to-background border-2 border-primary/30">
+      <DialogContent className="sm:max-w-md bg-gradient-to-br from-card to-background border-2 border-primary/30 btn-shadow">
         <DialogHeader>
-          <DialogTitle className="font-pokemon text-5xl text-center">
-            {isWin ? (
-              <span className="text-primary">You Won!</span>
-            ) : (
-              <span className="text-accent">Game Over</span>
-            )}
+          <DialogTitle className="font-pokemon text-5xl text-center pokemon-title">
+            {isWin ? 'You Won!' : 'Game Over'}
           </DialogTitle>
-          <DialogDescription className="text-center text-base pt-2">
+          <DialogDescription className="text-center text-base pt-2 text-shadow">
             {isWin
-              ? 'Amazing! You remembered all the Pokémon!'
+              ? 'Amazing! You remembered all the PoKéMoN!'
               : 'Oops! You clicked the same card twice!'}
           </DialogDescription>
         </DialogHeader>
         <div className="text-center py-6">
-          <div className="flex justify-center gap-8">
-            <div>
-              <span className="text-muted-foreground text-sm">Final Score</span>
-              <p className="font-pokemon text-5xl text-primary">{score}</p>
+          <div className="flex justify-center gap-12">
+            <div className="flex flex-col items-center gap-2">
+              <span className="text-muted-foreground text-sm text-shadow">Final Score</span>
+              <p className="font-pokemon text-4xl text-primary text-shadow-lg">{score}</p>
             </div>
-            <div>
-              <span className="text-muted-foreground text-sm">Best Score</span>
-              <p className="font-pokemon text-5xl text-secondary">{bestScore}</p>
+            <div className="flex flex-col items-center gap-2">
+              <span className="text-muted-foreground text-sm text-shadow">Best Score</span>
+              <p className="font-pokemon text-4xl text-secondary text-shadow-lg">{bestScore}</p>
             </div>
           </div>
         </div>
@@ -58,7 +54,7 @@ export default function GameOverDialog({
           <Button
             onClick={onRestart}
             size="lg"
-            className="font-semibold text-lg px-8"
+            className="font-semibold text-lg px-8 btn-shadow"
           >
             Play Again
           </Button>

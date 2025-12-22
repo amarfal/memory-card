@@ -98,6 +98,40 @@ body {
   letter-spacing: 0.08em;
 }
 
+/* Pokémon title style - yellow fill with blue outline */
+.pokemon-title {
+  color: #FFCB05;
+  -webkit-text-stroke: 3px #3B82F6;
+  paint-order: stroke fill;
+  text-shadow: 
+    4px 4px 0 #1e40af,
+    -1px -1px 0 #1e40af,
+    1px -1px 0 #1e40af,
+    -1px 1px 0 #1e40af;
+}
+
+/* Text shadow utilities */
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.text-shadow-lg {
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Button shadow */
+.btn-shadow {
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-shadow:hover {
+  box-shadow: 
+    0 6px 10px rgba(0, 0, 0, 0.4),
+    0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
 /* Card hover glow effect */
 .card-glow {
   transition: all 0.2s ease;

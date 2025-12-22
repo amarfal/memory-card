@@ -19,19 +19,16 @@ export default function PokemonCard({ pokemon, onClick, disabled }: PokemonCardP
       )}
       onClick={disabled ? undefined : onClick}
     >
-      <CardContent className="p-3 sm:p-4 flex flex-col items-center">
+      <CardContent className="p-4 sm:p-5 flex items-center justify-center">
         <div className="relative">
-          <div className="absolute inset-0 bg-primary/10 rounded-full blur-xl" />
+          <div className="absolute inset-0 bg-primary/10 rounded-full blur-xl scale-125" />
           <img
             src={pokemon.image}
             alt={pokemon.name}
-            className="relative w-20 h-20 sm:w-24 sm:h-24 drop-shadow-lg"
+            className="relative w-28 h-28 sm:w-32 sm:h-32 drop-shadow-lg"
             draggable={false}
           />
         </div>
-        <p className="text-center capitalize mt-2 font-semibold text-sm sm:text-base">
-          {pokemon.name}
-        </p>
       </CardContent>
     </Card>
   )

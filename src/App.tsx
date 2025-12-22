@@ -9,10 +9,10 @@ function App() {
     >
       <div className="min-h-screen bg-gradient-to-b from-black/70 via-black/50 to-black/70 backdrop-blur-xs">
         <header className="text-center py-8">
-          <h1 className="font-pokemon text-5xl md:text-7xl text-primary drop-shadow-lg">
-            Pokémon Memory Game
+          <h1 className="font-pokemon text-5xl md:text-7xl pokemon-title">
+            PoKéMoN Memory Game
           </h1>
-          <p className="text-muted-foreground mt-3 text-lg">
+          <p className="text-foreground/80 mt-3 text-lg text-shadow">
             Click each card only once — don't repeat!
           </p>
         </header>

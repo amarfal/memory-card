@@ -20,7 +20,7 @@ export default function LoadingSpinner() {
     <div className="flex flex-col items-center gap-4 py-12">
       <div className={`pokeball pokeball--${ballType}`} />
       <p className="text-muted-foreground">
-        Catching Pokémon with {BALL_NAMES[ballType]}...
+        Catching PoKéMoN with {BALL_NAMES[ballType]}...
       </p>
     </div>
   )
