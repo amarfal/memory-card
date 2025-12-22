@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Pokemon, Difficulty, GameStatus, DIFFICULTY_CARDS } from '@/types/pokemon'
 import { shuffleArray, generateRandomIds } from '@/lib/utils'
+import Scoreboard from './Scoreboard'
+import DifficultySelector from './DifficultySelector'
+import CardGrid from './CardGrid'
+import GameOverDialog from './GameOverDialog'
 
 const POKEMON_API_BASE = 'https://pokeapi.co/api/v2/pokemon'
 const POKEMON_ID_RANGE = { min: 1, max: 1010 }
@@ -60,7 +64,6 @@ export default function Game() {
     if (status !== 'playing') return
 
     if (clickedIds.has(id)) {
-      // Already clicked — game over
       setStatus('lost')
       return
     }
@@ -75,13 +78,11 @@ export default function Game() {
       setBestScore(newScore)
     }
 
-    // Check win condition
     if (newClickedIds.size === pokemon.length) {
       setStatus('won')
       return
     }
 
-    // Shuffle cards
     setPokemon(shuffleArray(pokemon))
   }
 
@@ -92,73 +93,35 @@ export default function Game() {
     setStatus('playing')
   }
 
-  function handleDifficultyChange(newDifficulty: Difficulty) {
-    setDifficulty(newDifficulty)
-  }
-
   return (
     <div className="flex flex-col items-center gap-6 p-4">
-      {/* Header with scores and difficulty */}
-      <div className="flex items-center gap-8">
-        <div className="text-lg">
-          Score: <span className="font-bold text-primary">{score}</span>
-        </div>
-        <div className="text-lg">
-          Best: <span className="font-bold text-primary">{bestScore}</span>
-        </div>
-        <select
+      <div className="flex items-center gap-6">
+        <Scoreboard score={score} bestScore={bestScore} />
+        <DifficultySelector
           value={difficulty}
-          onChange={(e) => handleDifficultyChange(e.target.value as Difficulty)}
-          className="bg-secondary text-secondary-foreground px-3 py-1 rounded-md"
+          onChange={setDifficulty}
           disabled={status === 'loading'}
-        >
-          <option value="easy">Easy (6)</option>
-          <option value="medium">Medium (12)</option>
-          <option value="hard">Hard (18)</option>
-        </select>
+        />
       </div>
 
-      {/* Loading state */}
       {status === 'loading' && (
-        <div className="text-xl">Loading Pokémon...</div>
+        <div className="text-xl animate-pulse">Loading Pokémon...</div>
       )}
 
-      {/* Game grid */}
       {status !== 'loading' && (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {pokemon.map((p) => (
-            <button
-              key={p.id}
-              onClick={() => handleCardClick(p.id)}
-              disabled={status !== 'playing'}
-              className="bg-card rounded-lg p-4 hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <img src={p.image} alt={p.name} className="w-24 h-24 mx-auto" />
-              <p className="text-center capitalize mt-2">{p.name}</p>
-            </button>
-          ))}
-        </div>
+        <CardGrid
+          pokemon={pokemon}
+          onCardClick={handleCardClick}
+          disabled={status !== 'playing'}
+        />
       )}
 
-      {/* Game over / Win state */}
-      {(status === 'lost' || status === 'won') && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-          <div className="bg-card p-8 rounded-xl text-center">
-            <h2 className="text-3xl font-bold mb-4">
-              {status === 'won' ? '🎉 You Won!' : '😢 Game Over'}
-            </h2>
-            <p className="text-lg mb-2">Score: {score}</p>
-            <p className="text-muted-foreground mb-6">Best: {bestScore}</p>
-            <button
-              onClick={handleRestart}
-              className="bg-primary text-primary-foreground px-6 py-2 rounded-md font-semibold hover:bg-primary/90"
-            >
-              Play Again
-            </button>
-          </div>
-        </div>
-      )}
+      <GameOverDialog
+        status={status}
+        score={score}
+        bestScore={bestScore}
+        onRestart={handleRestart}
+      />
     </div>
   )
 }
-
