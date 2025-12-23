@@ -31,6 +31,7 @@ export default function Game() {
   const [clickedIds, setClickedIds] = useState<Set<number>>(new Set())
   const [score, setScore] = useState(0)
   const [bestScore, setBestScore] = useLocalStorage('bestScore', 0)
+  const [extremeBeaten, setExtremeBeaten] = useLocalStorage('extremeBeaten', false)
   const [difficulty, setDifficulty] = useState<Difficulty>('medium')
   const [status, setStatus] = useState<GameStatus>('loading')
 
@@ -74,6 +75,9 @@ export default function Game() {
 
     if (newClickedIds.size === pokemon.length) {
       setStatus('won')
+      if (difficulty === 'extreme') {
+        setExtremeBeaten(true)
+      }
       return
     }
 
@@ -95,6 +99,7 @@ export default function Game() {
           value={difficulty}
           onChange={setDifficulty}
           disabled={status === 'loading'}
+          extremeBeaten={extremeBeaten}
         />
       </div>
 
@@ -113,6 +118,7 @@ export default function Game() {
         score={score}
         bestScore={bestScore}
         onRestart={handleRestart}
+        isExtremeWin={status === 'won' && difficulty === 'extreme'}
       />
     </div>
   )
