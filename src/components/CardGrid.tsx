@@ -22,3 +22,4 @@ export default function CardGrid({ pokemon, onCardClick, disabled }: CardGridPro
   )
 }
 
+
