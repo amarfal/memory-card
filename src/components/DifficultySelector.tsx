@@ -26,7 +26,7 @@ export default function DifficultySelector({
       onValueChange={(v) => onChange(v as Difficulty)}
       disabled={disabled}
     >
-      <SelectTrigger className="w-44 bg-card/80 backdrop-blur-sm border-border/50 btn-shadow">
+      <SelectTrigger className="w-52 bg-card/80 backdrop-blur-sm border-border/50 btn-shadow">
         <SelectValue />
       </SelectTrigger>
       <SelectContent className="bg-card border-border/50">

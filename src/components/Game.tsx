@@ -32,7 +32,7 @@ export default function Game() {
   const [score, setScore] = useState(0)
   const [bestScore, setBestScore] = useLocalStorage('bestScore', 0)
   const [extremeBeaten, setExtremeBeaten] = useLocalStorage('extremeBeaten', false)
-  const [difficulty, setDifficulty] = useState<Difficulty>('medium')
+  const [difficulty, setDifficulty] = useLocalStorage<Difficulty>('difficulty', 'medium')
   const [status, setStatus] = useState<GameStatus>('loading')
 
   // Fetch pokemon when difficulty changes

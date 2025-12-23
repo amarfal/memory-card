@@ -32,18 +32,20 @@ export default function GameOverDialog({
 
   useEffect(() => {
     if (isOpen && isWin && isExtremeWin) {
-      // Start continuous confetti
       const fire = () => {
         confetti({
-          particleCount: 50,
-          spread: 80,
+          particleCount: 80,
+          spread: 100,
+          startVelocity: 45,
+          gravity: 1.2,
+          scalar: 1.3,
           origin: { y: 0, x: Math.random() },
           colors: ['#FFCB05', '#3B82F6', '#EE1515', '#7C3AED', '#EC4899'],
         })
       }
       
       fire()
-      confettiInterval.current = window.setInterval(fire, 400)
+      confettiInterval.current = window.setInterval(fire, 200)
     }
 
     return () => {
@@ -54,7 +56,7 @@ export default function GameOverDialog({
     }
   }, [isOpen, isWin, isExtremeWin])
 
-  function handleRestart() {
+  function stopConfettiAndRestart() {
     if (confettiInterval.current) {
       clearInterval(confettiInterval.current)
       confettiInterval.current = null
@@ -63,8 +65,14 @@ export default function GameOverDialog({
     onRestart()
   }
 
+  function handleOpenChange(open: boolean) {
+    if (!open) {
+      stopConfettiAndRestart()
+    }
+  }
+
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-md bg-gradient-to-br from-card to-background border-2 border-primary/30 btn-shadow">
         <DialogHeader>
           <DialogTitle className="font-pokemon text-5xl text-center pokemon-title">
@@ -92,7 +100,7 @@ export default function GameOverDialog({
         </div>
         <DialogFooter className="sm:justify-center">
           <Button
-            onClick={handleRestart}
+            onClick={stopConfettiAndRestart}
             size="lg"
             className="font-semibold text-lg px-8 btn-shadow"
           >

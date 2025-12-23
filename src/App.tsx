@@ -12,7 +12,7 @@ function App() {
           <h1 className="font-pokemon text-5xl md:text-7xl pokemon-title">
             PoKéMoN Memory Game
           </h1>
-          <p className="text-foreground/80 mt-3 text-lg text-shadow">
+          <p className="text-foreground/80 mt-6 text-lg text-shadow">
             Click each card only once — don't repeat!
           </p>
         </header>
